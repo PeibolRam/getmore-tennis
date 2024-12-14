@@ -1,0 +1,108 @@
+.getmore-collections-with-button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+.getmore-collections-tag p {
+  margin: 0;
+  font-family: HelveticaNeue;
+  font-size: 15px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2;
+  letter-spacing: 1.87px;
+}
+
+.getmore-collections-text h2 {
+  margin: 0;
+  font-family: HelveticaNeue;
+  font-size: 30px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.14;
+  letter-spacing: -0.06px;
+}
+
+.getmore-collections-text p {
+  font-family: HelveticaNeue;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.78;
+  letter-spacing: 0.51px;
+}
+
+.getmore-collections-button {
+  margin-top: 20px;
+}
+
+.getmore-collections-button a {
+  font-family: HelveticaNeue;
+  font-size: 13px;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.15;
+  letter-spacing: 1.01px;
+  text-decoration: none;
+  padding: 15px 38px;
+  border-radius: 26.5px;
+  text-transform: uppercase;
+  min-width: 230px;
+  max-width: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (min-width: 768px) {
+  .getmore-collections-with-button-container {
+    align-items: center;
+    text-align: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  .getmore-collections-with-button {
+    padding: 36px 84px 33px 120px;
+
+  }
+
+  .getmore-collections-with-button-container {
+    flex-direction: row;
+    align-items: normal;
+    text-align: left;
+  }
+
+  .getmore-collections-tag {
+    margin-right: 50px;
+  }
+
+  .getmore-collections-tag p {
+    text-align: right;
+  }
+
+  .getmore-collections-text {
+    max-width: 592px;
+  }
+
+  .getmore-collections-text h2 {
+    font-size: 50px;
+  }
+
+  .getmore-collections-text p {
+    font-size: 18px;
+    max-width: 393px;
+  }
+
+  .getmore-collections-button {
+    margin-top: 0;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+  }
+}

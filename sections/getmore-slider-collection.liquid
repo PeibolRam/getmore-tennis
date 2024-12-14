@@ -1,0 +1,157 @@
+{{ 'getmore-slider-collection.css' | asset_url | stylesheet_tag }}
+
+<section class="getmore-slider-collection">
+  {% if section.blocks.size > 0 %}
+    <div class="getmore-slider-container">
+      <div class="getmore--slides">
+        {% for block in section.blocks %}
+          <div
+            class="getmore--slide"
+            style="background-image: url('{{ block.settings.slide_image  | img_url: 'master' }}'); color: {{ block.settings.text_color }}"
+          >
+            <div class="getmore--slide-title">{{ block.settings.slide_title }}</div>
+            <div class="getmore--slide-text">{{ block.settings.slide_text }}</div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="getmore--slide-dots">
+        {% for block in section.blocks %}
+          <span class="getmore--slide-dot" onclick="currentSlide({{ forloop.index0 }})"></span>
+        {% endfor %}
+        <div class="getmore--slide-arrows">
+          <button id="getmore--slide-arrows_left" class="getmore--slide-arrow">
+            <span class="material-symbols-outlined"> arrow_left </span>
+          </button>
+          <button id="getmore--slide-arrows_right" class="getmore--slide-arrow">
+            <span class="material-symbols-outlined"> arrow_right </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  <div class="getmore-collection-container">
+    <div class="getmore-collection-products">
+      {% assign collection_ref = collections[section.settings.collection] %}
+      {% for product in collection_ref.products %}
+        <div
+          class="product-getmore-collection"
+          style="background-image: url('{{ product.featured_image | img_url: 'master' }}')"
+        >
+          <span class="product-tag">{{ forloop.index }}</span>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script>
+  let currentIndex = 0;
+  let slides = document.querySelectorAll('.getmore--slide');
+  let dots = document.querySelectorAll('.getmore--slide-dot');
+  let leftButton = document.querySelector('#getmore--slide-arrows_left');
+  let rightButton = document.querySelector('#getmore--slide-arrows_right');
+
+  leftButton.addEventListener('click', () => {
+    prevSlide();
+  });
+
+  rightButton.addEventListener('click', () => {
+    nextSlide();
+  });
+
+  function showSlide(index) {
+    if (index >= slides.length) {
+      currentIndex = 0;
+    } else if (index < 0) {
+      currentIndex = slides.length - 1;
+    } else {
+      currentIndex = index;
+    }
+
+    let offset = -currentIndex * 100;
+    document.querySelector('.getmore--slides').style.transform = `translateX(${offset}%)`;
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentIndex);
+    });
+  }
+
+  function nextSlide() {
+    showSlide(currentIndex + 1);
+  }
+
+  function prevSlide() {
+    showSlide(currentIndex - 1);
+  }
+
+  function currentSlide(index) {
+    showSlide(index);
+  }
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      currentSlide(i);
+    });
+  });
+
+  showSlide(currentIndex);
+  setInterval(nextSlide, 20000);
+</script>
+
+{% schema %}
+{
+  "name": "Getmore slider collection",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Colección"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "slide_image",
+          "label": "Imagen de fondo"
+        },
+        {
+          "type": "richtext",
+          "id": "slide_title",
+          "label": "Titulo de slide"
+        },
+        {
+          "type": "textarea",
+          "id": "slide_text",
+          "label": "Texto de slide"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Color del texto",
+          "default": "#fff"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Getmore slider collection",
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

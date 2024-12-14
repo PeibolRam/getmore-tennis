@@ -1,0 +1,59 @@
+{{ 'get-more-header.css' | asset_url | stylesheet_tag }}
+
+<style>
+  header {
+    color: {{ section.settings.text_color }}
+  }
+</style>
+
+<header>
+  <div class="header-conatiner">
+    {% if settings.logo != blank %}
+      <a href="{{ routes.root_url }}" class="header_logo-link ">
+        {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+        {{ settings.logo | image_url: width: 600 | image_tag:
+          class: 'header-logo',
+          alt: logo_alt,
+          preload: true
+        }}
+      </a>
+    {% endif %}
+    <div class="header-menu_navigation-container">
+      <nav class="header-menu_navigation">
+        <ul>
+          {% for link in section.settings.menu.links %}
+            <li>
+              <a href="{{ link.url }}">
+                {{ link.title | escape }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+    <div class="header-selector_language-container">
+      <span class="selector_language-active">ES</span>
+      <span class="">EN</span>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Getmore Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "Menu"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color del texto",
+      "default": "#fff"
+    }
+  ]
+}
+{% endschema %}

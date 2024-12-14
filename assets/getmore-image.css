@@ -1,0 +1,41 @@
+.getmore-banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.getmore-banner {
+  width: 100%;
+}
+
+.getmore-banner a {
+  width: 100%;
+}
+
+.getmore-banner-mobile {
+  display: flex;
+}
+
+.getmore-banner-desk {
+  display: none;
+}
+
+.getmore-banner img {
+  width: 100%;
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .getmore-banner-mobile {
+    display: none;
+  }
+
+  .getmore-banner-desk {
+    display: flex;
+    width: 100%;
+  }
+}

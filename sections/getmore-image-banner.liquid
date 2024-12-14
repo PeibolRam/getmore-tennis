@@ -1,0 +1,104 @@
+{{ 'getmore-image-banner.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .getmore-image-banner {
+    {% if section.settings.banner_mob != blank %}
+      background-image: url({{ section.settings.banner_mob | img_url: 'master' }});
+    {% elsif section.settings.banner_desk != blank %}
+      background-image: url({{ section.settings.banner_desk | img_url: 'master' }});
+    {% endif %}
+  }
+
+  .getmore-image-banner-container {
+    color: {{ section.settings.text_color }};
+  }
+
+  .getmore-image-banner-container p strong {
+    color: {{ section.settings.text_color_strong }};
+  }
+
+  .getmore-image-banner-btn {
+    color: {{ section.settings.btn_color }};
+    border: solid 1px {{ section.settings.btn_color }};
+  }
+
+  @media (min-width: 768px) {
+    {% if section.settings.banner_desk != blank %}
+      .getmore-image-banner {
+        background-image: url({{ section.settings.banner_desk | img_url: 'master' }});
+      }
+    {% endif %}
+  }
+</style>
+
+<section class="getmore-image-banner">
+  <div class="line-banner"></div>
+  <div class="getmore-image-banner-container">
+    {{ section.settings.content }}
+    {% if section.settings.link != blank %}
+      <a href="{{ section.settings.link }}" class="getmore-image-banner-btn">
+        {{- section.settings.btn_text }}
+        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="6" viewBox="0 0 23 6">
+          <path fill="#29304A" fill-rule="evenodd" d="M22.908 2.7L20.428.128a.39.39 0 0 0-.579 0 .425.425 0 0 0 0 .6l1.778 1.843H.413C.165 2.57 0 2.74 0 3c0 .257.165.428.413.428h21.213l-1.779 1.844a.425.425 0 0 0 0 .6.44.44 0 0 0 .29.128.44.44 0 0 0 .289-.129l2.48-2.572a.531.531 0 0 0 .002-.6z"/>
+        </svg>
+      </a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Getmore banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "banner_mob",
+      "label": "Imagen para movil"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_desk",
+      "label": "Imagen para escritorio"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Text"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color del texto",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "text_color_strong",
+      "label": "Color del texto negritas",
+      "default": "#cbe346"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "color",
+      "id": "btn_color",
+      "label": "Color del botón",
+      "default": "#fff"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Texto del botón",
+      "default": "Ver más"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Getmore banner"
+    }
+  ]
+}
+{% endschema %}
